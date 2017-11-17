@@ -1,0 +1,17 @@
+{
+    "name": "binarycabin/laravel-password",
+    "description": "Basic tools for updating a user's password on create/update",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jeff Kilroy",
+            "email": "jeff@binarycabin.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "BinaryCabin\\LaravelPassword\\": "src/"
+        }
+    }
+}
