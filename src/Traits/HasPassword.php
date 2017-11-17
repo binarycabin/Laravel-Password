@@ -16,8 +16,11 @@ trait HasPassword{
         static::updating(function($model) {
             $passwordFieldName = $model->getPasswordFieldName();
             $modelMutator = new ModelMutator($model);
-            if(!empty($model->$passwordFieldName)){
+            $currentHashedPassword = $model->getOriginal('password');
+            if(!empty($model->$passwordFieldName) && $model->$passwordFieldName != $currentHashedPassword){
                 $model = $modelMutator->hashPassword($passwordFieldName)->getModel();
+            }else{
+                unset($model->password);
             }
         });
     }
