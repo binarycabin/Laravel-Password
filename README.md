@@ -46,3 +46,15 @@ return User::create([
     'password' => $data['password'],
 ]);
 ```
+
+Additionally, the default ResetPasswordController will hash the User's password as well. Add this to the controller to overwrite this functionality:
+
+```
+protected function resetPassword($user, $password){
+    $user->password = $password;
+    $user->setRememberToken(\Illuminate\Support\Str::random(60));
+    $user->save();
+    event(new \Illuminate\Auth\Events\PasswordReset($user));
+    $this->guard()->login($user);
+}
+```    
